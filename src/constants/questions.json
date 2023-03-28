@@ -1,0 +1,17 @@
+[
+    {
+        "question": "Who is the prime minister for England",
+        "options": ["Rishi Sunak", "Joe Bidden", "Narendra Modi", "Kim Joung"],
+        "correctAns": "Rishi Sunak"
+    },
+    {
+        "question": "What comes after X",
+        "options": ["A", "O", "Y", "2"],
+        "correctAns": "Y"
+    },
+    {
+        "question": "What comes after 3",
+        "options": ["4", "2", "-4", "3"],
+        "correctAns": "4"
+    }
+]
