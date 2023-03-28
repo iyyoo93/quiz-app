@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,12 +23,12 @@ export default function Home() {
         <section className="h-screen bg-blue-300 flex justify-between flex-col">
           <div className="m-auto text-center">
             <p className=" text-white text-2xl "> Welcome to the Quiz App, Press below button to start the Quiz</p>
-            <a href="/quiz">
+            <Link href="/quiz">
               <button 
-                className="mt-5 border-white border-solid border-white text-white border-solid border-2 rounded-lg px-10 py-3 hover:border-dotted hover: border-yellow-100 hover:text-yellow-200 hover:bg-black">
+                className="mt-5 border-solid border-white text-white border-solid border-2 rounded-lg px-10 py-3 hover:border-dotted hover: border-yellow-100 hover:text-yellow-200 hover:bg-black">
                   Start Quiz
                 </button>
-            </a>
+            </Link>
           </div>
         </section>
       </main>
