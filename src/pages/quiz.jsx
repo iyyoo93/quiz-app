@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import CountdownTimer from "@/components/CountdownTimer";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Quiz App</title>
+        <Link href="/"><title>Quiz App</title></Link>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>

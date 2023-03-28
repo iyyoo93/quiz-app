@@ -50,9 +50,7 @@ const CountdownTimer = ({ targetDate }) => {
           <h1 className="text-3xl font-md h-full ">Quiz App</h1>
         </div>
         <div className="my-auto text-3xl px-10">
-          {days + hours + minutes + seconds <= 0 ? (
-            <ExpiredNotice />
-          ) : (
+          {days + hours + minutes + seconds > 0 && (
             <ShowCounter
               days={days}
               hours={hours}
