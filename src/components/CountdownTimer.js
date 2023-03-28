@@ -16,14 +16,9 @@ const ExpiredNotice = () => {
 const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (
     <div className="show-counter">
-      <a
-        href="https://tapasadhikary.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="countdown-link"
-      >
-        <DateTimeDisplay value={days} type={"Days"} isDanger={days <= 3} />
-        <p>:</p>
+      <a target="_blank" rel="noopener noreferrer" className="countdown-link">
+        {/* <DateTimeDisplay value={days} type={"Days"} isDanger={days <= 3} />
+        <p>:</p> */}
         <DateTimeDisplay value={hours} type={"Hours"} isDanger={false} />
         <p>:</p>
         <DateTimeDisplay value={minutes} type={"Mins"} isDanger={false} />
@@ -49,7 +44,7 @@ const CountdownTimer = ({ targetDate }) => {
         <div className="ml-10 my-auto">
           <h1 className="text-3xl font-md h-full ">Quiz App</h1>
         </div>
-        <div className="my-auto text-3xl px-10">
+        <div className="my-auto text-3xl px-10 w-fit">
           {days + hours + minutes + seconds > 0 && (
             <ShowCounter
               days={days}
@@ -60,7 +55,7 @@ const CountdownTimer = ({ targetDate }) => {
           )}
         </div>
       </header>
-      <section className="h-screen bg-blue-300 flex justify-between flex-col">
+      <section className="h-screen bg-blue-300 flex justify-between flex-col w-screen">
         {showModal || days + hours + minutes + seconds <= 0 ? (
           <div className="m-auto text-center text-3xl text-red-600">
             You have answered {crtAns} with in the time
