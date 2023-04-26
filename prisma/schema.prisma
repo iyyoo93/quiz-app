@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Hotel {
+  id          Int        @id @default(autoincrement())
+  name        String
+  main_image  String
+  description String
+  open_time   String
+  close_time  String
+  slug        String     @unique
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  Employee    Employee[]
+  Report      Report[]
+}
+
+model Employee {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email_id String   @unique
+  hotel_id Int
+  hotel    Hotel    @relation(fields: [hotel_id], references: [id])
+  password String
+  Report   Report[]
+}
+
+model Report {
+  id          Int      @id @default(autoincrement())
+  till_amount Int
+  incident    String
+  remarks     String
+  issues      String
+  status      Status
+  hotel_id    Int
+  hotel       Hotel    @relation(fields: [hotel_id], references: [id])
+  employee_id Int
+  employee    Employee @relation(fields: [employee_id], references: [id])
+}
+
+enum Status {
+  Open
+  Closed
+  Inprogress
+}
