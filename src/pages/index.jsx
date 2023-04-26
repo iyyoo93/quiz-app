@@ -1,37 +1,24 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import LoginForm from "@/components/LoginForm";
 import Link from "next/link";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>Quiz App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-        <header className="h-20 bg-blue-400 flex justify-between absolute w-screen">
-          <div className="ml-10 my-auto"><h1 className="text-3xl font-md h-full ">Quiz App</h1></div>
-          <nav className="mr-10 my-auto flex justify-between gap-5 cursor-pointer">
-            <a href="" className="text-white hover:text-green-400">Login</a>
-            <a href="" className="text-white hover:text-green-400">Register</a>
-          </nav>
-        </header>
-        <section className="h-screen bg-blue-300 flex justify-between flex-col">
-          <div className="m-auto text-center">
-            <p className=" text-white text-2xl "> Welcome to the Quiz App, Press below button to start the Quiz</p>
-            <Link href="/quiz">
-              <button 
-                className="mt-5 border-solid border-white text-white border-solid border-2 rounded-lg px-10 py-3 hover:border-dotted hover: border-yellow-100 hover:text-yellow-200 hover:bg-black">
-                  Start Quiz
-                </button>
-            </Link>
-          </div>
-        </section>
+    <div className="min-h-screen bg-white">
+      <div className="bg-white h-20 flex items-center align-middle border-gray-300 border-b-2 justify-between px-10  bg-gradient-to-r from-blue-500 to-green-300">
+        <Link href="/">
+          <p className="font-medium text-white text-3xl">Co Pilot</p>
+        </Link>
+        <div className="flex justify-between gap-10 text-black">
+          <p>Login</p>
+          <p>Register</p>
+        </div>
+      </div>
+      <main className="flex min-h-[90%] flex-col items-center justify-between p-24 bg-white text-black">
+        <div className="border-blue-600 border-solid border-2 flex min-h-[93%] flex-col items-center justify-between  p-10 min-w-min">
+          <p className="text-2xl">Login</p>
+          <LoginForm />
+        </div>
       </main>
-    </>
+    </div>
   );
 }
