@@ -6,7 +6,7 @@ import Script from "next/script";
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
-      <Script src="https://statics.teams.microsoft.com/sdk/v1.11.0/js/MicrosoftTeams.min.js"></Script>
+      <Script src="node_modules/@microsoft/teams-js@2.11.0/dist/MicrosoftTeams.min.js"></Script>
       <Component {...pageProps} />
     </ChakraProvider>
   );

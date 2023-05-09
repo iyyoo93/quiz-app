@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app } from '@microsoft/teams-js';
 
 
 function LoginForm() {
@@ -16,29 +16,34 @@ function LoginForm() {
 
   async function getUserInfo() {
     try {
+
+      const user = await  app.getContext();
+      console.log('user-----', user);
+      setName(JSON.stringify(user))
+      
       // Authenticate the user and get an access token
-      const authToken = await microsoftTeams.authentication.authenticateAsync({
-        url: window.location.origin + '/auth-start.html',
-        width: 600,
-        height: 535,
-        successCallback: () => {
-          console.log('Authentication successful');
-        },
-        failureCallback: (reason) => {
-          console.error('Authentication failed:', reason);
-        }
-      });
+      // const authToken = await microsoftTeams.authentication.authenticateAsync({
+      //   url: window.location.origin + '/auth-start.html',
+      //   width: 600,
+      //   height: 535,
+      //   successCallback: () => {
+      //     console.log('Authentication successful');
+      //   },
+      //   failureCallback: (reason) => {
+      //     console.error('Authentication failed:', reason);
+      //   }
+      // });
   
-      // Use the access token to call the Microsoft Graph API to retrieve user information
-      const response = await fetch('https://graph.microsoft.com/v1.0/me', {
-        headers: {
-          'Authorization': 'Bearer ' + authToken
-        }
-      });
+      // // Use the access token to call the Microsoft Graph API to retrieve user information
+      // const response = await fetch('https://graph.microsoft.com/v1.0/me', {
+      //   headers: {
+      //     'Authorization': 'Bearer ' + authToken
+      //   }
+      // });
   
-      const data = await response.json();
-      console.log('Logged-in user:', data.displayName);
-      console.log('Logged-in user email:', data.mail);
+      // const data = await response.json();
+      // console.log('Logged-in user:', data.displayName);
+      // console.log('Logged-in user email:', data.mail);
     } catch (error) {
       console.error('Error retrieving user information:', error);
     }
@@ -46,7 +51,9 @@ function LoginForm() {
 
   useEffect(() => {
     const getFunc = async () => {
-      await microsoftTeams.initializeApp();
+      await app.initialize();
+      await app.notifyAppLoaded();
+      await app.notifySuccess();
       getUserInfo()
     }
     getFunc()
