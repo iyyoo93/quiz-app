@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^2.6.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@microsoft/teams-js": "^2.11.0",
     "@prisma/client": "4.13.0",
     "axios": "^1.3.6",
     "eslint": "8.36.0",

@@ -3,13 +3,54 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import * as microsoftTeams from "@microsoft/teams-js";
+
 
 function LoginForm() {
   const [error, setError] = useState("");
+  const [name, setName] = useState('');
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
+  async function getUserInfo() {
+    try {
+      // Authenticate the user and get an access token
+      const authToken = await microsoftTeams.authentication.authenticateAsync({
+        url: window.location.origin + '/auth-start.html',
+        width: 600,
+        height: 535,
+        successCallback: () => {
+          console.log('Authentication successful');
+        },
+        failureCallback: (reason) => {
+          console.error('Authentication failed:', reason);
+        }
+      });
+  
+      // Use the access token to call the Microsoft Graph API to retrieve user information
+      const response = await fetch('https://graph.microsoft.com/v1.0/me', {
+        headers: {
+          'Authorization': 'Bearer ' + authToken
+        }
+      });
+  
+      const data = await response.json();
+      console.log('Logged-in user:', data.displayName);
+      console.log('Logged-in user email:', data.mail);
+    } catch (error) {
+      console.error('Error retrieving user information:', error);
+    }
+  }
+
+  useEffect(() => {
+    const getFunc = async () => {
+      await microsoftTeams.initializeApp();
+      getUserInfo()
+    }
+    getFunc()
+  }, [])
 
   const jwt = Cookies.get("jwt"); // Replace "myCookie" with the name of your cookie
   //   const [hotel, setHotel] = useState({ name: "" });
@@ -21,7 +62,7 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label className="mt-7">Email id</label>
+      <label className="mt-7">Email id - {name || 'user'}</label>
       <input
         type="email"
         value={data.email}
