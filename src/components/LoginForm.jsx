@@ -18,7 +18,8 @@ function LoginForm() {
     try {
 
       const user = await  app.getContext();
-      console.log('user-----', user);
+      // console.log('user-----', user);
+      alert(JSON.stringify(user))
       setName(JSON.stringify(user))
       
       // Authenticate the user and get an access token
@@ -45,16 +46,24 @@ function LoginForm() {
       // console.log('Logged-in user:', data.displayName);
       // console.log('Logged-in user email:', data.mail);
     } catch (error) {
+      alert('Error retrieving user information:' + JSON.stringify(error))
       console.error('Error retrieving user information:', error);
     }
   }
 
   useEffect(() => {
     const getFunc = async () => {
-      await app.initialize();
-      await app.notifyAppLoaded();
-      await app.notifySuccess();
-      getUserInfo()
+      try {
+        
+        await app.initialize();
+        alert('initialised')
+        getUserInfo()
+
+      } catch (err) {
+        console.log(JSON.stringify(err));
+      }
+      // await app.notifyAppLoaded();
+      // await app.notifySuccess();
     }
     getFunc()
   }, [])
